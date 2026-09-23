@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculator</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      display: flex;
+      justify-content: center;
+      padding-top: 60px;
+      background: #f4f4f4;
+    }
+    .card {
+      background: white;
+      padding: 24px 32px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      width: 280px;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 8px;
+      margin: 6px 0;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+    #result {
+      margin-top: 12px;
+      font-weight: bold;
+      font-size: 18px;
+      min-height: 24px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Calculator</h2>
+    <input id="a" type="number" placeholder="First number" value="2">
+    <select id="op">
+      <option value="add">+</option>
+      <option value="subtract">-</option>
+      <option value="multiply">*</option>
+      <option value="divide">/</option>
+      <option value="power">^</option>
+    </select>
+    <input id="b" type="number" placeholder="Second number" value="3">
+    <button onclick="calculate()">Calculate</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function calculate() {
+      const a = parseFloat(document.getElementById('a').value);
+      const b = parseFloat(document.getElementById('b').value);
+      const op = document.getElementById('op').value;
+      const resultEl = document.getElementById('result');
+
+      let result;
+      if (op === 'add') result = a + b;
+      else if (op === 'subtract') result = a - b;
+      else if (op === 'multiply') result = a * b;
+      else if (op === 'divide') {
+        if (b === 0) {
+          resultEl.textContent = 'Error: cannot divide by zero';
+          return;
+        }
+        result = a / b;
+      } else if (op === 'power') result = Math.pow(a, b);
+
+      resultEl.textContent = 'Result: ' + result;
+    }
+  </script>
+</body>
+</html>
